@@ -2,7 +2,12 @@
 
 name = "remix-example-passkey-auth"
 compatibility_date = "2024-05-22"
-compatibility_flags = ["nodejs_compat"]
+upload_source_maps = true
+
+[env.production.vars]
+SERVER_ORIGIN = "https://remix-example-passkey-auth.hoishin.dev"
+RP_NAME = "Remix Example Passkey Auth"
+RP_ID = "remix-example-passkey-auth.hoishin.dev"
 
 [[d1_databases]]
 binding = "DB"

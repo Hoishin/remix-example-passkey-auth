@@ -5,7 +5,6 @@ import {
 	passkeyAuthenticationChallengeCookie,
 	sessionCookie,
 } from "../lib/cookies.server";
-import { env } from "../lib/env.server";
 import type {
 	AuthenticationResponseJSON,
 	AuthenticatorTransportFuture,
@@ -14,7 +13,10 @@ import { createToken } from "../lib/token.server";
 
 export const action = async ({
 	request,
-	context: { prisma },
+	context: {
+		prisma,
+		cloudflare: { env },
+	},
 }: ActionFunctionArgs) => {
 	await assertNoSession(request, prisma);
 

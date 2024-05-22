@@ -1,14 +1,16 @@
 import { json, type LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { assertNoSession } from "../lib/session.server";
 import { generateAuthenticationOptions } from "@simplewebauthn/server";
-import { env } from "../lib/env.server";
 import { useLoaderData, useSubmit } from "@remix-run/react";
 import { startAuthentication } from "@simplewebauthn/browser";
 import { passkeyAuthenticationChallengeCookie } from "../lib/cookies.server";
 
 export const loader = async ({
 	request,
-	context: { prisma },
+	context: {
+		prisma,
+		cloudflare: { env },
+	},
 }: LoaderFunctionArgs) => {
 	await assertNoSession(request, prisma);
 	const passkeyOptions = await generateAuthenticationOptions({

@@ -1,11 +1,14 @@
 import { createCookie } from "@remix-run/cloudflare";
-import { env } from "./env.server";
+
+const isNodeJs =
+	typeof globalThis.process !== "undefined" &&
+	globalThis.process.release.name === "node";
 
 export const sessionCookie = createCookie("session", {
 	httpOnly: true,
 	path: "/",
 	sameSite: "lax",
-	secure: env.NODE_ENV === "production",
+	secure: !isNodeJs,
 });
 
 export const passkeyAuthenticationChallengeCookie = createCookie(
@@ -14,6 +17,6 @@ export const passkeyAuthenticationChallengeCookie = createCookie(
 		httpOnly: true,
 		path: "/",
 		sameSite: "lax",
-		secure: env.NODE_ENV === "production",
+		secure: !isNodeJs,
 	}
 );

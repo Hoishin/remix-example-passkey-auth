@@ -6,7 +6,6 @@ import {
 import { z } from "zod";
 import { zfd } from "zod-form-data";
 import { createToken } from "../lib/token.server";
-import { env } from "../lib/env.server";
 import { useActionData } from "@remix-run/react";
 import { assertNoSession } from "../lib/session.server";
 
@@ -42,7 +41,10 @@ const actionSchema = zfd.formData({
 
 export const action = async ({
 	request,
-	context: { prisma },
+	context: {
+		prisma,
+		cloudflare: { env },
+	},
 }: ActionFunctionArgs) => {
 	await assertNoSession(request, prisma);
 

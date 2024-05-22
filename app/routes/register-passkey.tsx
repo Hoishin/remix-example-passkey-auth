@@ -8,7 +8,6 @@ import {
 	generateRegistrationOptions,
 	verifyRegistrationResponse,
 } from "@simplewebauthn/server";
-import { env } from "../lib/env.server";
 import type { AuthenticatorTransportFuture } from "@simplewebauthn/types";
 import { useActionData, useLoaderData, useSubmit } from "@remix-run/react";
 import { startRegistration } from "@simplewebauthn/browser";
@@ -16,7 +15,10 @@ import type { RegistrationResponseJSON } from "@simplewebauthn/types";
 
 export const loader = async ({
 	request,
-	context: { prisma },
+	context: {
+		prisma,
+		cloudflare: { env },
+	},
 }: LoaderFunctionArgs) => {
 	const user = await assertSession(request, prisma);
 	const existingPasskeys = await prisma.passkeys.findMany({
@@ -73,7 +75,10 @@ export default () => {
 
 export const action = async ({
 	request,
-	context: { prisma },
+	context: {
+		prisma,
+		cloudflare: { env },
+	},
 }: ActionFunctionArgs) => {
 	const user = await assertSession(request, prisma);
 
