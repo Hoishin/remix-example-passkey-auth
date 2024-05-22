@@ -1,0 +1,34 @@
+{
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "remix vite:build",
+		"dev": "run-p --race dev:*",
+		"dev:remix": "remix vite:dev",
+		"dev:prisma": "prisma generate --watch",
+		"dev:type-check": "tsc --noEmit --watch --preserveWatchOutput",
+		"typegen": "wrangler types"
+	},
+	"dependencies": {
+		"@prisma/adapter-d1": "^5.14.0",
+		"@prisma/client": "^5.14.0",
+		"@remix-run/cloudflare": "^2.9.2",
+		"@remix-run/cloudflare-pages": "^2.9.2",
+		"@remix-run/react": "^2.9.2",
+		"@simplewebauthn/browser": "^10.0.0",
+		"@simplewebauthn/server": "^10.0.0",
+		"isbot": "4",
+		"zod": "^3.23.8",
+		"zod-form-data": "^2.0.2"
+	},
+	"devDependencies": {
+		"@remix-run/dev": "^2.9.2",
+		"@types/react": "^18.3.2",
+		"@types/react-dom": "^18.3.0",
+		"execa": "^9.1.0",
+		"npm-run-all2": "^6.2.0",
+		"prisma": "^5.14.0",
+		"typescript": "^5.4.5",
+		"wrangler": "^3.56.0"
+	}
+}

@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id    String @id @default(uuid())
+  email String @unique
+
+  Passkey                      Passkeys[]
+  Session                      Sessions[]
+  EmailAuthenticationChallenge EmailAuthenticationChallenges[]
+  PasskeyRegistrationChallenge PasskeyRegistrationChallenges?
+}
+
+model Sessions {
+  id     String @id @default(uuid())
+  userId String
+  token  String @unique
+
+  User Users @relation(fields: [userId], references: [id])
+}
+
+model Passkeys {
+  id         String  @id
+  publicKey  Bytes
+  userId     String
+  counter    BigInt
+  deviceType String
+  backedUp   Boolean
+
+  User              Users               @relation(fields: [userId], references: [id])
+  PasskeyTransports PasskeyTransports[]
+}
+
+model PasskeyTransports {
+  id        String @id @default(uuid())
+  passkeyId String
+  transport String
+
+  passkey Passkeys @relation(fields: [passkeyId], references: [id])
+}
+
+model EmailRegistrationChallenges {
+  id    String @id @default(uuid())
+  email String
+  token String @unique
+}
+
+model EmailAuthenticationChallenges {
+  id     String @id @default(uuid())
+  userId String
+  token  String @unique
+
+  User Users @relation(fields: [userId], references: [id])
+}
+
+model PasskeyRegistrationChallenges {
+  id        String @id @default(uuid())
+  userId    String @unique
+  challenge String
+
+  User Users @relation(fields: [userId], references: [id])
+}

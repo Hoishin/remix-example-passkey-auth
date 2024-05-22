@@ -1,0 +1,40 @@
+{
+	"compilerOptions": {
+		/* Visit https://aka.ms/tsconfig to read more about this file */
+
+		/* Projects */
+		"incremental": true,
+
+		/* Language and Environment */
+		"target": "ESNext",
+		"lib": ["ESNext", "DOM"],
+		"jsx": "react-jsx",
+
+		/* Modules */
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"types": [],
+
+		/* Emit */
+		"noEmit": true,
+
+		/* Interop Constraints */
+		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
+		"forceConsistentCasingInFileNames": true,
+
+		/* Type Checking */
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"exactOptionalPropertyTypes": false,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitOverride": true,
+		"noPropertyAccessFromIndexSignature": true,
+
+		/* Completeness */
+		"skipLibCheck": true
+	}
+}

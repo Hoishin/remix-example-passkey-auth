@@ -1,0 +1,10 @@
+#:schema node_modules/wrangler/config-schema.json
+
+name = "remix-example-passkey-auth"
+compatibility_date = "2024-05-22"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "remix-example-passkey-auth"
+database_id = "548dc3c5-15b1-44f2-908e-72931e38b8b5"
