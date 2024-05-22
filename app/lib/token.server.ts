@@ -1,5 +1,5 @@
-import { randomBytes } from "node:crypto";
-
 export const createToken = async () => {
-	return randomBytes(255).toString("base64url");
+	const arr = new Uint8Array(128);
+	crypto.getRandomValues(arr);
+	return Buffer.from(arr).toString("base64url");
 };
